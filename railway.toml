@@ -3,15 +3,6 @@ builder = "nixpacks"
 
 [deploy]
 startCommand = "python server.py"
-restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 10
 
 [service]
 internal_port = 8000
-
-[[headers]]
-for = "/api/*"
-[headers.values]
-Access-Control-Allow-Origin = "*"
-Access-Control-Allow-Methods = "POST, OPTIONS"
-Access-Control-Allow-Headers = "Content-Type"
