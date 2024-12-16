@@ -1,10 +1,10 @@
 [build]
-builder = "NIXPACKS"
+builder = "nixpacks"
 
 [deploy]
 startCommand = "python server.py"
-healthcheckPath = "/"
-healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
 
 [service]
 internal_port = 8000

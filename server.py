@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import requests
 import time
+import pathlib
 
 load_dotenv()
 
@@ -26,10 +27,12 @@ ART_STYLE_PROMPTS = {
         professional illustration, photorealistic elements, detailed shading"""
 }
 
+BASE_DIR = pathlib.Path(__file__).parent
+
 @routes.get('/')
 async def serve_html(request):
     try:
-        with open('index.html', 'r') as f:
+        with open(BASE_DIR / 'index.html', 'r') as f:
             return web.Response(text=f.read(), content_type='text/html')
     except Exception as e:
         return web.Response(text=str(e), status=500)
@@ -131,7 +134,7 @@ async def generate(request):
 @routes.get('/home')
 async def serve_home(request):
     try:
-        with open('home.html', 'r') as f:
+        with open(BASE_DIR / 'home.html', 'r') as f:
             return web.Response(text=f.read(), content_type='text/html')
     except Exception as e:
         return web.Response(text=str(e), status=500)
@@ -139,7 +142,7 @@ async def serve_home(request):
 @routes.get('/generator')
 async def serve_generator(request):
     try:
-        with open('generator.html', 'r') as f:
+        with open(BASE_DIR / 'generator.html', 'r') as f:
             return web.Response(text=f.read(), content_type='text/html')
     except Exception as e:
         return web.Response(text=str(e), status=500)
@@ -147,7 +150,7 @@ async def serve_generator(request):
 @routes.get('/whitepaper')
 async def serve_whitepaper(request):
     try:
-        with open('whitepaper.html', 'r') as f:
+        with open(BASE_DIR / 'whitepaper.html', 'r') as f:
             return web.Response(text=f.read(), content_type='text/html')
     except Exception as e:
         return web.Response(text=str(e), status=500)
@@ -156,7 +159,7 @@ async def serve_whitepaper(request):
 async def serve_assets(request):
     filename = request.match_info['filename']
     try:
-        with open(f'assets/{filename}', 'rb') as f:
+        with open(BASE_DIR / 'assets' / filename, 'rb') as f:
             return web.Response(body=f.read(), content_type='image/png')
     except Exception as e:
         return web.Response(text=str(e), status=500)
