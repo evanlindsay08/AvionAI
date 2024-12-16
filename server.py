@@ -168,4 +168,10 @@ if __name__ == '__main__':
     print("Starting server...")
     print(f"Leonardo API Key present: {'Yes' if LEONARDO_API_KEY else 'No'}")
     port = int(os.environ.get('PORT', 8000))
-    web.run_app(web.Application().add_routes(routes), port=port, host='0.0.0.0') 
+    
+    # Create the application first
+    app = web.Application()
+    # Add routes to the application
+    app.add_routes(routes)
+    # Run the application
+    web.run_app(app, port=port, host='0.0.0.0') 
